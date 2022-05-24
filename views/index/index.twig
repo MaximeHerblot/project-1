@@ -1,0 +1,22 @@
+{% extends '../layout.twig' %}
+
+{% block body %}
+	<div>
+		<h1>Bienvenue dans l'application</h1>
+
+		<table>
+			<tr>
+				<th>Titre</th>
+				<th>Description</th>
+				<th>Author</th>
+			</tr>
+			{% for article in articles %}
+				<tr>
+					<td>{{article.title}}</td>
+					<td>{{article.description}}</td>
+					<td>{{article.user.username}}</td>
+				</tr>
+			{% endfor %}
+		</table>
+	</div>
+{% endblock %}

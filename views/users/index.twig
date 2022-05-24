@@ -1,0 +1,36 @@
+{% extends '../layout.twig' %}
+
+{% block body %}
+	<style>
+		.card-list-user {
+			display: flex;
+			align-content: center;
+			justify-content: space-between;
+			align-items: center;
+		}
+	</style>
+	<div class="card col-6">
+		<div class="card-header card-list-user">
+			<span>Liste des utilisateurs</span>
+			<a href="/users/create_form" class="btn btn-primary" role="button" aria-pressed="true">Création d'un utilisateur</a>
+		</div>
+		<div class="card-body">
+			<table class="table">
+				<tr>
+					<th>Nom d'utilisateur</th>
+					<th>Mail</th>
+					<th>Age</th>
+				</tr>
+				{% for user in users %}
+					<tr>
+						<td>{{user.username}}</td>
+						<td>{{user.email}}</td>
+						<td>{{user.age}}</td>
+					</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+	
+
+{% endblock %}
