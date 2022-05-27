@@ -5,7 +5,6 @@ exports.allUsers = async (req, res) => {
   let data = {
     users: users,
   };
-  console.log(users);
   res.render("users/index", data);
 };
 
@@ -32,24 +31,35 @@ exports.createUser = async (req, res) => {
     data.success = "true";
     User.create(req.body);
   }
-  //   }
   res.status(status).json(data);
 };
 
 exports.getUser = async (req, res) => {
-  let currentUser = await User.findById(req.params.id);
-  let data = {
-    user: currentUser,
-    articles: await Article.find({ user: currentUser }),
-  };
-  res.status(200).render("users/user", data);
+  try {
+    let currentUser = await User.findById(req.params.id);
+    let data = {
+      user: currentUser,
+      articles: await Article.find({ user: currentUser }),
+    };
+    res.status(200).render("users/user", data);
+  } catch (error) {
+    res.render("error", {
+      message: "L'utilisateur est introuvable",
+      status: "404",
+    });
+  }
 };
 
 exports.createArticle = async (req, res) => {
-  let data = {
-    userId: req.params.id,
-  };
-  res.render("users/create/article", data);
+  try {
+    await User.findById(req.params.id);
+    let data = {
+      userId: req.params.id,
+    };
+    res.render("users/create/article", data);
+  } catch (error) {
+    res.render("error", { message: "L'utilisateur n'existe pas" });
+  }
 };
 
 exports.createArticleAjax = async (req, res) => {
@@ -57,13 +67,19 @@ exports.createArticleAjax = async (req, res) => {
     success: "true",
     formMessage: "Création réussi",
   };
-  let user = await User.findById(req.body.userId);
-  let params = req.body;
-  let article = await Article.create({
-    title: params.title,
-    description: params.description,
-    user: user,
-  });
-  data.article = article;
-  res.status("200").json(data);
+  try {
+    let user = await User.findById(req.body.userId);
+    let params = req.body;
+    let article = await Article.create({
+      title: params.title,
+      description: params.description,
+      user: user,
+    });
+    data.article = article;
+    res.status("200").json(data);
+  } catch (error) {
+    data.formMessage = "Une erreur c'est produite";
+    res.status("200").json(data);
+    // if (req.body)
+  }
 };
