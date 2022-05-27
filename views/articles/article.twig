@@ -1,0 +1,49 @@
+{% extends '../layout.twig' %}
+
+{% block body %}
+	<style>
+		.card-list-user {
+			display: flex;
+			align-content: center;
+			justify-content: space-between;
+			align-items: center;
+		}
+	</style>
+	<div class="d-flex justify-content-center mt-5">
+		<div class="card" style="min-width:30%;">
+			<div class="card-header card-list-user">
+				<span>Information sur un article</span>
+			</div>
+			<div class="card-body">
+				<h2>Titre :</h2>
+				<h3>
+					{{article.title}}
+				</h3>
+				<h2>Description :</h2>
+				<p>
+					{{article.description}}
+				</p>
+				<h2>Auteur :</h2>
+
+				<span>
+					{% if article.user.username is defined %}
+						{{article.user.username}}
+					{% else %}
+						L'auteur n'existe plus
+					{% endif %}
+				</span>
+				<td></td>
+
+			</tr>
+		</div>
+
+		<div class="card-footer d-flex justify-content-between">
+			<a href="/">
+				<button type="button" class="btn btn-primary">Retour accueil</button>
+			</a>
+			<a href="/users">
+				<button type="button" class="btn btn-primary">Liste des utilisateurs</button>
+			</a>
+		</div>
+	</div>
+</div>{% endblock %}

@@ -1,34 +1,42 @@
 {% extends '../layout.twig' %}
 
 {% block body %}
+	<style>
+		.card-list-user {
+			display: flex;
+			align-content: center;
+			justify-content: space-between;
+			align-items: center;
+		}
+	</style>
 	<div class="d-flex justify-content-center mt-5">
-		<div>
-			<h1>Bienvenue dans l'application</h1>
-
-			<p>Voici la liste des articles disponible sur le site</p>
-			<div class="card">
-				<div class="card-header card-list-user">
-					<span>Liste des articles disponible sur le site</span>
+		<div class="card">
+			<div class="card-header card-list-user">
+				<span>Utilisateur</span>
+				<a href="/users/create/article/{{user._id}}" class="btn btn-primary" role="button" aria-pressed="true">Ajouter un article</a>
+			</div>
+			<div class="card-body">
+				<div class="information_users d-flex flex-column">
+					<span>Email :
+						{{user.email}}</span>
+					<span>Username :
+						{{user.username}}</span>
+					<span>Age :
+						{{user.age}}</span>
 				</div>
-				<div class="card-body">
-					<table class="table row">
+				<div class="list_article">
+					<h6>Liste des articles</h6>
+					<table class="table">
 						<tr>
 							<th>Titre</th>
 							<th>Description</th>
-							<th>Auteur</th>
-							<th>Action</th>
+							<th>Actions</th>
 						</tr>
 						{% for article in articles %}
 							<tr>
 								<td>{{article.title}}</td>
 								<td>{{article.description}}</td>
-								<td>
-									{% if article.user.username is defined %}
-										{{article.user.username}}
-									{% else %}
-										L'auteur n'existe plus
-									{% endif %}
-								</td>
+
 								<td>
 									<a href="/articles/article/{{article._id}}">
 										<svg width="24px" height="24px" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
@@ -39,13 +47,21 @@
 						{% endfor %}
 						{% if articles|length == 0 %}
 							<tr>
-								<td colspan="4">Aucun article a été créer</td>
+								<td colspan="3">Cette utilisateur n'a pas encore d'article
+									<a href="/users/create/article/{{user._id}}">Cliquer ici pour créer un article</a>
+								</td>
 							</tr>
 						{% endif %}
 					</table>
 				</div>
-
+			</div>
+			<div class="card-footer">
+				<a href="/users/">
+					<button type="button" class="btn btn-primary">Retour arrière</button>
+				</a>
 			</div>
 		</div>
+	</div>
 
-	{% endblock %}
+
+{% endblock %}

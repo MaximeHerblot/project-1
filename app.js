@@ -6,7 +6,7 @@ var logger = require("morgan");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
-var articlesRouter = require("./routes/articles");
+var articlesRouter = require("./routes/article");
 
 var app = express();
 const mongoose = require("mongoose");

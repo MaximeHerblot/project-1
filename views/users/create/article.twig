@@ -1,0 +1,38 @@
+{% extends '../../layout.twig' %}
+
+{% block body %}
+	<div class="d-flex justify-content-center">
+		<div class="card mt-5" style="min-width:30%;">
+			<div class="card-header card-list-user">
+				<span>Création d'un article</span>
+			</div>
+			<div class="card-body">
+				<form class="p-3" id="createFormArticle">
+					<div class="mb-3">
+						<label for="title" class="form-label">Article title</label>
+						<input type="text" name="title" class="form-control" id="title" aria-describedby="titleHelp" required>
+						<div id="titleHelp" class="form-text">Enter nice title for article</div>
+					</div>
+					<div class="mb-3">
+						<div class="form-floating">
+							<textarea name="description" class="form-control" placeholder="Enter a description" id="description" style="height: 100px" required></textarea>
+							<label for="description">Description</label>
+						</div>
+					</div>
+					<button type="submit" class="btn btn-primary">Créer un article
+					</button>
+					<input name="userId" type="hidden" value="{{userId}}">
+				</form>
+				<script src="/javascripts/users/create/article.js"></script>
+			</div>
+
+			<div class="card-footer">
+				<a href="/users/">
+					<button type="button" class="btn btn-primary">Retour liste utilisateurs</button>
+				</a>
+			</div>
+		</div>
+	</div>
+	<script src="/javascripts/library/toast.min.js"></script>
+
+{% endblock %}

@@ -1,4 +1,4 @@
-$("#createFormUser").on("submit", (event) => {
+$("#createFormArticle").on("submit", (event) => {
   event.preventDefault();
   let data = {};
   let form = $(event.target);
@@ -6,10 +6,14 @@ $("#createFormUser").on("submit", (event) => {
     this.setAttribute("disabled", true);
     data[this.name] = this.value;
   });
+  form.find("textarea").each(function () {
+    this.setAttribute("disabled", true);
+    data[this.name] = this.value;
+  });
   $.ajax({
     method: "POST",
     data: data,
-    url: "/users/create",
+    url: "/users/create/article",
     success: (data) => {
       const options = {
         style: {
@@ -21,12 +25,14 @@ $("#createFormUser").on("submit", (event) => {
       };
       iqwerty.toast.toast(data.formMessage, options);
       if (data.success == "true") {
-        form.find("input").each(function () {
+        form.find("input, textarea").each(function () {
           this.removeAttribute("disabled");
-          this.value = "";
+          if (this.name !== "userId") {
+            this.value = "";
+          }
         });
       } else {
-        form.find("input").each(function () {
+        form.find("input, textarea").each(function () {
           this.removeAttribute("disabled");
         });
       }

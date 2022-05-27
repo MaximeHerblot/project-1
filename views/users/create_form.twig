@@ -1,21 +1,37 @@
 {% extends '../layout.twig' %}
 
 {% block body %}
-	<form class="col-6 p-3" id="createFormUser">
-		<div class="mb-3">
-			<label for="email" class="form-label">Email address</label>
-			<input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" required>
-			<div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+	<div class="d-flex justify-content-center">
+		<div class="card col-6 mt-5">
+			<div class="card-header card-list-user">
+				<span>Création d'un utilisateur</span>
+			</div>
+			<div class="card-body">
+				<form class="p-3" id="createFormUser">
+					<div class="mb-3">
+						<label for="email" class="form-label">Email address</label>
+						<input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" required>
+						<div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+					</div>
+					<div class="mb-3">
+						<label for="username" class="form-label">Username</label>
+						<input type="text" name="username" class="form-control" id="username" required>
+					</div>
+					<div class="mb-3">
+						<label for="age" class="form-label">Age</label>
+						<input type="number" min="0" name="age" class="form-control" id="age" required>
+					</div>
+					<button type="submit" class="btn btn-primary">Create users
+					</button>
+				</form>
+				<script src="/javascripts/users/create_form.js"></script>
+			</div>
+			<div class="card-footer">
+				<a href="/users">
+					<button type="button" class="btn btn-primary">Retour arrière</button>
+				</a>
+			</div>
 		</div>
-		<div class="mb-3">
-			<label for="username" class="form-label">Username</label>
-			<input type="text" name="username" class="form-control" id="username" required>
-		</div>
-		<div class="mb-3">
-			<label for="age" class="form-label">Age</label>
-			<input type="number" min="0" name="age" class="form-control" id="age" required>
-		</div>
-		<button type="submit" class="btn btn-primary">Submit</button>
-	</form>
-	<script src="/javascripts/users/create_form.js"></script>
+	</div>
+	<script src="/javascripts/library/toast.min.js"></script>
 {% endblock %}
